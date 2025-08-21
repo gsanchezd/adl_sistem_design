@@ -225,7 +225,7 @@ export default function AtomsPage() {
           
           {selectValue && (
             <p className="text-sm text-muted-foreground">
-              Valor seleccionado: <strong>"{selectValue}"</strong>
+              Valor seleccionado: <strong>&quot;{selectValue}&quot;</strong>
             </p>
           )}
         </section>
@@ -647,8 +647,8 @@ export default function AtomsPage() {
           <p>Sistema de Diseño Empieza - Componentes Atómicos</p>
           <p className="mt-2">
             Tema actual: <strong>{theme}</strong> • 
-            Valor del input: <strong>"{inputValue}"</strong> •
-            Valor del select: <strong>"{selectValue}"</strong>
+            Valor del input: <strong>&quot;{inputValue}&quot;</strong> •
+            Valor del select: <strong>&quot;{selectValue}&quot;</strong>
           </p>
           
           <div className="mt-4 space-x-4">

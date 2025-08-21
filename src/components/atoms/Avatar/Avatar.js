@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
 import { cn } from '../../../utils/cn';
 import { sizePropType } from '../../../utils/propTypes';
 
@@ -57,10 +58,12 @@ const Avatar = ({
   return (
     <div className={avatarClasses} {...props}>
       {src ? (
-        <img
+        <Image
           className="aspect-square h-full w-full object-cover"
           src={src}
           alt={alt || name || 'Avatar'}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           onError={(e) => {
             // Si falla la carga de imagen, ocultar el img para mostrar el fallback
             e.target.style.display = 'none';

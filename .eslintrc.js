@@ -9,7 +9,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'next/core-web-vitals',
-    'prettier',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -26,7 +25,8 @@ module.exports = {
     // React
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'warn',
-    'react/display-name': 'off',
+    'react/display-name': 'error',
+    'react/no-unescaped-entities': 'error',
     
     // Hooks
     'react-hooks/rules-of-hooks': 'error',
@@ -36,11 +36,6 @@ module.exports = {
     'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'prefer-const': 'error',
-    
-    // Style
-    'quotes': ['error', 'single', { avoidEscape: true }],
-    'semi': ['error', 'always'],
-    'comma-dangle': ['error', 'always-multiline'],
   },
   settings: {
     react: {

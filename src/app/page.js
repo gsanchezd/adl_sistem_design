@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from '../contexts/ThemeContext';
 import { Button, Icon, Badge } from '../components/atoms';
 
@@ -41,9 +42,11 @@ export default function Home() {
         {/* Header */}
         <header className="text-center space-y-6 mb-16">
           <div className="flex justify-center mb-4">
-            <img 
+            <Image 
               src="https://doc-images-adl.s3-sa-east-1.amazonaws.com/logo.svg" 
               alt="Empieza" 
+              width={64}
+              height={64}
               className="h-16 w-auto"
             />
           </div>

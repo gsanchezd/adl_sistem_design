@@ -186,7 +186,7 @@ export default function MoleculesPage() {
           
           {searchValue && (
             <p className="text-sm text-muted-foreground">
-              Valor actual: <strong>"{searchValue}"</strong>
+              Valor actual: <strong>&quot;{searchValue}&quot;</strong>
             </p>
           )}
         </section>
@@ -549,7 +549,7 @@ export default function MoleculesPage() {
           <p>Sistema de Diseño Empieza - Componentes Moleculares</p>
           <p className="mt-2">
             Tema actual: <strong>{theme}</strong> • 
-            Valor de búsqueda: <strong>"{searchValue}"</strong>
+            Valor de búsqueda: <strong>&quot;{searchValue}&quot;</strong>
           </p>
           <div className="mt-4 space-x-4">
             <Link href="/">
