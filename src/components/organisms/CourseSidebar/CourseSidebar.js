@@ -15,8 +15,8 @@ const CourseSidebar = ({
 
   const resources = [
     { id: 1, name: 'Reportes', icon: 'document', href: '#' },
-    { id: 2, name: 'Feedback', icon: 'inbox', href: '#' },
-    { id: 3, name: 'Preguntas Frecuentes', icon: 'help', href: '#' },
+    { id: 2, name: 'Feedback', icon: 'message', href: '#' },
+    { id: 3, name: 'Preguntas Frecuentes', icon: 'question', href: '#' },
     { id: 4, name: 'Resumen Académico', icon: 'user', href: '#' },
     { id: 5, name: 'Apuntes', icon: 'edit', href: '#' },
     { id: 6, name: 'Favoritos', icon: 'heart', href: '#' },

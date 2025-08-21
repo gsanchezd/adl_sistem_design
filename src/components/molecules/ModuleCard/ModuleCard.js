@@ -19,6 +19,8 @@ const ModuleCard = ({
   onClick,
   className,
   module,
+  types = [],
+  links = {},
   ...props
 }) => {
   // Usar props del módulo o props individuales
@@ -155,16 +157,50 @@ const ModuleCard = ({
             </p>
           )}
 
-          {/* Tipos de aprendizaje */}
-          <div className="space-y-1 text-sm text-muted-foreground mb-3">
-            <div className="flex items-center">
-              <Icon name="refresh" size="xs" className="mr-2" />
-              Autoaprendizaje
-            </div>
-            {displayType === 'tutoring' && (
+          {/* Enlaces de acceso */}
+          <div className="space-y-1 text-sm mb-3">
+            {types.map((type) => {
+              let linkText = type;
+              let iconName = 'document';
+              
+              if (type === 'programa-academico') {
+                linkText = 'Programa Académico';
+                iconName = 'book';
+              } else if (type === 'clase') {
+                linkText = 'Clase';
+                iconName = 'monitor';
+              } else if (type === 'tutoria') {
+                linkText = 'Tutoría';
+                iconName = 'users';
+              }
+              
+              return (
+                <div key={type} className="flex items-center">
+                  <Icon name={iconName} size="xs" className="mr-2 text-muted-foreground" />
+                  {links[type] && displayStatus !== 'blocked' ? (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = links[type];
+                      }}
+                      className="text-primary hover:text-primary/80 underline transition-colors"
+                    >
+                      {linkText}
+                    </button>
+                  ) : (
+                    <span className={displayStatus === 'blocked' ? 'text-muted-foreground' : 'text-foreground'}>
+                      {linkText}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+            
+            {/* Fallback para módulos sin types */}
+            {types.length === 0 && (
               <div className="flex items-center">
-                <Icon name="book" size="xs" className="mr-2" />
-                Tutoría
+                <Icon name="refresh" size="xs" className="mr-2 text-muted-foreground" />
+                <span className="text-muted-foreground">Autoaprendizaje</span>
               </div>
             )}
           </div>
@@ -199,37 +235,11 @@ const ModuleCard = ({
                 Completado
               </Badge>
             )}
-            {displayStatus === 'optional' && (
-              <Badge status={displayStatus} size="sm">
-                Opcional
-              </Badge>
-            )}
             {displayStatus === 'blocked' && <div />}
 
-            {/* Botón de acción - solo para estados específicos */}
-            {displayStatus === 'in-progress' && (
-              <Button
-                size="sm"
-                variant="primary"
-                onClick={handleAction}
-                className="ml-auto min-w-[100px] text-center"
-              >
-                Continuar
-              </Button>
-            )}
-            {displayStatus === 'completed' && (
-              <Button
-                size="sm"
-                variant="primary"
-                onClick={handleAction}
-                className="ml-auto min-w-[100px] text-center"
-              >
-                Entrar
-              </Button>
-            )}
             {displayStatus === 'blocked' && (
               <span className="text-xs text-muted-foreground ml-auto">
-                Completa módulos anteriores
+                Bloqueado
               </span>
             )}
           </div>
@@ -254,6 +264,8 @@ ModuleCard.propTypes = {
   onAction: PropTypes.func,
   onClick: PropTypes.func,
   className: PropTypes.string,
+  types: PropTypes.arrayOf(PropTypes.string),
+  links: PropTypes.objectOf(PropTypes.string),
 };
 
 export default ModuleCard;

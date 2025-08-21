@@ -64,8 +64,12 @@ const Header = ({
           variant="ghost" 
           size="sm"
           onClick={onToggleTheme}
+          className="flex items-center gap-2"
         >
-          <Icon name="settings" size="sm" />
+          <Icon name={theme === 'light' ? 'moon' : 'sun'} size="sm" />
+          <span className="hidden md:inline text-sm">
+            {theme === 'light' ? 'Tema Oscuro' : 'Tema Claro'}
+          </span>
         </Button>
 
         {/* Notificaciones */}

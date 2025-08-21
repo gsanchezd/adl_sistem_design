@@ -169,17 +169,21 @@ export default function CursosPage() {
             }}
           />
 
-          {/* Course grid */}
-          <main className="p-6">
-            <div className="mb-6 flex items-center justify-between">
-              <p className="text-muted-foreground">
-                Mostrando {startIndex + 1}-{Math.min(endIndex, filteredCourses.length)} de {filteredCourses.length} cursos
-              </p>
+          {/* Course content */}
+          <main className="p-6 space-y-6">
+            {/* Course Listing Section */}
+            <div className="bg-card border border-border rounded-xl p-6">
+              <div className="mb-6">
+                <h2 className="text-xl font-semibold">Mis Cursos</h2>
+                <p className="text-muted-foreground text-sm">
+                  Mostrando {startIndex + 1}-{Math.min(endIndex, filteredCourses.length)} de {filteredCourses.length} cursos disponibles
+                </p>
+              </div>
               
               {filteredCourses.length === 0 && filters.search && (
                 <div className="text-center py-12">
                   <Icon name="search" size="xl" className="text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-foreground mb-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     No se encontraron cursos
                   </h3>
                   <p className="text-muted-foreground">
@@ -187,24 +191,24 @@ export default function CursosPage() {
                   </p>
                 </div>
               )}
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {currentCourses.map((course) => (
-                <CourseCard
-                  key={course.id}
-                  title={course.title}
-                  code={course.code}
-                  status={course.status}
-                  type={course.type}
-                  startDate={course.startDate}
-                  endDate={course.endDate}
-                  hasMoreClasses={course.hasMoreClasses}
-                  role={course.role}
-                  icon={course.icon}
-                  onAccess={() => handleCourseAccess(course)}
-                />
-              ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {currentCourses.map((course) => (
+                  <CourseCard
+                    key={course.id}
+                    title={course.title}
+                    code={course.code}
+                    status={course.status}
+                    type={course.type}
+                    startDate={course.startDate}
+                    endDate={course.endDate}
+                    hasMoreClasses={course.hasMoreClasses}
+                    role={course.role}
+                    icon={course.icon}
+                    onAccess={() => handleCourseAccess(course)}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Pagination - Demo */}

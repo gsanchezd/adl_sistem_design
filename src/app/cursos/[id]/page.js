@@ -23,50 +23,77 @@ const getCourseData = (id) => {
           number: 1,
           title: 'Prepárate para este curso',
           status: 'optional',
-          types: ['autoaprendizaje']
+          types: ['programa-academico'],
+          links: {
+            'programa-academico': '/cursos/1/seccion/1'
+          }
         },
         {
           id: 2,
           number: 2,
           title: 'Evaluación Diagnóstico',
           status: 'completed',
-          types: ['autoaprendizaje', 'tutoria']
+          types: ['clase', 'tutoria'],
+          links: {
+            'clase': '/cursos/1/seccion/2',
+            'tutoria': '/cursos/1/seccion/2?tipo=tutoria'
+          }
         },
         {
           id: 3,
           number: 3,
           title: 'MÓDULO 1',
           status: 'completed',
-          types: ['autoaprendizaje', 'tutoria']
+          types: ['clase', 'tutoria'],
+          links: {
+            'clase': '/cursos/1/seccion/3',
+            'tutoria': '/cursos/1/seccion/3?tipo=tutoria'
+          }
         },
         {
           id: 4,
           number: 4,
           title: 'MÓDULO 2',
           status: 'active',
-          types: ['autoaprendizaje', 'tutoria'],
-          isActive: true
+          types: ['clase', 'tutoria'],
+          isActive: true,
+          links: {
+            'clase': '/cursos/1/seccion/4',
+            'tutoria': '/cursos/1/seccion/4?tipo=tutoria'
+          }
         },
         {
           id: 5,
           number: 5,
           title: 'Encuestas',
           status: 'blocked',
-          types: ['autoaprendizaje']
+          types: ['clase', 'tutoria'],
+          links: {
+            'clase': '/cursos/1/seccion/5',
+            'tutoria': '/cursos/1/seccion/5?tipo=tutoria'
+          }
         },
         {
           id: 6,
           number: 6,
           title: 'MÓDULO 3',
           status: 'blocked',
-          types: ['tutoria']
+          types: ['clase', 'tutoria'],
+          links: {
+            'clase': '/cursos/1/seccion/6',
+            'tutoria': '/cursos/1/seccion/6?tipo=tutoria'
+          }
         },
         {
           id: 7,
           number: 7,
           title: 'Evaluación Final',
           status: 'blocked',
-          types: ['tutoria']
+          types: ['clase', 'tutoria'],
+          links: {
+            'clase': '/cursos/1/seccion/7',
+            'tutoria': '/cursos/1/seccion/7?tipo=tutoria'
+          }
         }
       ],
       progress: {
@@ -102,8 +129,27 @@ export default function CursoPage({ params }) {
     );
   }
 
-  const handleModuleAccess = (moduleData) => {
-    console.log('Accediendo al módulo:', moduleData);
+  const handleModuleAccess = (moduleData, actionType = null) => {
+    console.log('Accediendo al módulo:', moduleData, actionType);
+    
+    // Buscar el módulo completo en los datos
+    const fullModule = course.modules.find(m => m.title === moduleData.title);
+    
+    if (fullModule && fullModule.links) {
+      let targetUrl = null;
+      
+      if (actionType && fullModule.links[actionType]) {
+        targetUrl = fullModule.links[actionType];
+      } else if (fullModule.links['programa-academico']) {
+        targetUrl = fullModule.links['programa-academico'];
+      } else if (fullModule.links['clase']) {
+        targetUrl = fullModule.links['clase'];
+      }
+      
+      if (targetUrl) {
+        window.location.href = targetUrl;
+      }
+    }
   };
 
   return (
@@ -168,8 +214,9 @@ export default function CursoPage({ params }) {
                   title={module.title}
                   status={module.status}
                   types={module.types}
+                  links={module.links}
                   active={module.isActive}
-                  onAction={handleModuleAccess}
+                  onAction={(e, data) => handleModuleAccess(data)}
                 />
               ))}
             </div>
