@@ -15,6 +15,7 @@ import { Icon } from '../../components/atoms';
 import { IconButton } from '../../components/atoms';
 import { ProgressBar } from '../../components/atoms';
 import { Table } from '../../components/atoms';
+import { Pagination } from '../../components/atoms';
 import { ColorPalette } from '../../components/atoms';
 
 export default function AtomsPage() {
@@ -38,6 +39,7 @@ export default function AtomsPage() {
     darkMode: false,
   });
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleLoadingTest = () => {
     setLoading(true);
@@ -638,6 +640,109 @@ export default function AtomsPage() {
                   </Table.Body>
                 </Table>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pagination Section */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold">Paginación</h2>
+          <p className="text-muted-foreground">
+            Componente de navegación por páginas con soporte completo para accesibilidad.
+          </p>
+          
+          <div className="space-y-8">
+            {/* Basic pagination */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-medium">Paginación básica</h3>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={10}
+                onPageChange={setCurrentPage}
+              />
+              <p className="text-sm text-muted-foreground">
+                Página actual: <strong>{currentPage}</strong> de <strong>10</strong>
+              </p>
+            </div>
+
+            {/* Different sizes */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-medium">Tamaños</h3>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm font-medium mb-2">Pequeña</p>
+                  <Pagination
+                    currentPage={3}
+                    totalPages={15}
+                    size="sm"
+                    onPageChange={() => {}}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium mb-2">Mediana (por defecto)</p>
+                  <Pagination
+                    currentPage={7}
+                    totalPages={15}
+                    size="md"
+                    onPageChange={() => {}}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium mb-2">Grande</p>
+                  <Pagination
+                    currentPage={5}
+                    totalPages={15}
+                    size="lg"
+                    onPageChange={() => {}}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Different configurations */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-medium">Configuraciones</h3>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm font-medium mb-2">Solo números de página</p>
+                  <Pagination
+                    currentPage={5}
+                    totalPages={10}
+                    showFirstLast={false}
+                    showPrevNext={false}
+                    onPageChange={() => {}}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium mb-2">Sin botones primera/última</p>
+                  <Pagination
+                    currentPage={8}
+                    totalPages={20}
+                    showFirstLast={false}
+                    onPageChange={() => {}}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-medium mb-2">Pocas páginas visibles</p>
+                  <Pagination
+                    currentPage={12}
+                    totalPages={50}
+                    maxVisiblePages={3}
+                    onPageChange={() => {}}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="p-4 bg-muted/20 rounded-lg">
+            <h3 className="text-sm font-semibold mb-2">Propiedades principales:</h3>
+            <div className="text-sm text-muted-foreground space-y-1">
+              <p>• <code className="bg-muted px-1 rounded">currentPage</code> - Página actual</p>
+              <p>• <code className="bg-muted px-1 rounded">totalPages</code> - Total de páginas</p>
+              <p>• <code className="bg-muted px-1 rounded">onPageChange</code> - Callback al cambiar página</p>
+              <p>• <code className="bg-muted px-1 rounded">size</code> - Tamaño (sm, md, lg)</p>
+              <p>• <code className="bg-muted px-1 rounded">maxVisiblePages</code> - Máximo de páginas visibles</p>
             </div>
           </div>
         </section>

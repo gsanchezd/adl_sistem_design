@@ -14,4 +14,5 @@ export { default as IconButton } from './IconButton/IconButton';
 export { default as ProgressBar } from './ProgressBar/ProgressBar';
 export { default as Spinner } from './Spinner/Spinner';
 export { default as Table } from './Table/Table';
+export { default as Pagination } from './Pagination/Pagination';
 export { default as ColorPalette } from './ColorPalette/ColorPalette';
