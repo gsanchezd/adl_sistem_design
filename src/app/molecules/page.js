@@ -12,7 +12,8 @@ import {
   DropdownItem, 
   ProgressSection,
   Alert,
-  Breadcrumbs 
+  Breadcrumbs,
+  CourseCard
 } from '../../components/molecules';
 import { Button, Icon } from '../../components/atoms';
 
@@ -540,6 +541,104 @@ export default function MoleculesPage() {
                   />
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CourseCard Section */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold">CourseCard</h2>
+          <p className="text-muted-foreground">
+            Tarjetas de curso con banner de estado superior y contenido adaptable al tema
+          </p>
+          
+          <div className="space-y-6">
+            {/* Course Card Examples */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Estados de Curso</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Curso Concluido */}
+                <CourseCard
+                  title="[ADMIN] PreBootcamp"
+                  code="Curso de Preparación"
+                  status="concluded"
+                  type="e-Learning"
+                  role="Admin"
+                  startDate="2021-08-03"
+                  endDate="2021-08-03"
+                  hasMoreClasses={true}
+                  icon="book"
+                  onAccess={(data) => console.log('Curso concluido:', data)}
+                />
+
+                {/* Curso Activo */}
+                <CourseCard
+                  title="LP4 - Programación básica en Python"
+                  code="Data Science"
+                  status="active"
+                  type="e-Learning"
+                  role="Estudiante"
+                  startDate="2024-01-02"
+                  endDate="2024-06-30"
+                  hasMoreClasses={false}
+                  icon="code"
+                  onAccess={(data) => console.log('Curso activo:', data)}
+                />
+
+                {/* Curso Próximamente */}
+                <CourseCard
+                  title="Diseño UX/UI Avanzado"
+                  code="UX/UI Bootcamp"
+                  status="upcoming"
+                  type="Inmersivo"
+                  role="Estudiante"
+                  startDate="2024-07-01"
+                  endDate="2024-12-15"
+                  icon="design"
+                  onAccess={(data) => console.log('Curso próximo:', data)}
+                />
+              </div>
+            </div>
+
+            {/* Course Card Variations */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Variaciones de Contenido</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Curso con fechas completas */}
+                <CourseCard
+                  title="Data Analysis Completo"
+                  code="Análisis de Datos"
+                  status="active"
+                  type="Híbrido"
+                  role="Estudiante"
+                  startDate="2024-01-15"
+                  endDate="2024-05-30"
+                  hasMoreClasses={true}
+                  icon="chart"
+                  onAccess={(data) => console.log('Data Analysis:', data)}
+                />
+
+                {/* Curso sin fechas de inicio */}
+                <CourseCard
+                  title="Fundamentos de Marketing Digital"
+                  code="Marketing Online"
+                  status="concluded"
+                  type="e-Learning"
+                  role="Alumni"
+                  endDate="2023-12-20"
+                  icon="lightning"
+                  onAccess={(data) => console.log('Marketing:', data)}
+                />
+              </div>
+            </div>
+
+            {/* Course Card Information */}
+            <div className="p-4 bg-accent rounded-lg">
+              <p className="text-sm text-accent-foreground">
+                <strong>💡 Características:</strong> Las CourseCard ahora tienen un banner de estado en la parte superior 
+                y fondo neutro que se adapta al tema. Incluyen iconos temáticos, información detallada del curso, 
+                fechas de inicio/fin, y botones de acceso según el estado del curso.
+              </p>
             </div>
           </div>
         </section>

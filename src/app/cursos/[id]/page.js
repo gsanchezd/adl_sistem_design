@@ -185,18 +185,6 @@ export default function CursoPage({ params }) {
 
         {/* Content */}
         <div className="p-6 space-y-6">
-          {/* Success Banner */}
-          <div className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-6">
-            <div className="flex items-center space-x-4">
-              <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center">
-                <Icon name="check" size="lg" className="text-primary" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-primary">Curso completado exitosamente</h3>
-                <p className="text-muted-foreground">Has terminado todas las actividades. Excelente trabajo en tu proceso de aprendizaje.</p>
-              </div>
-            </div>
-          </div>
 
           {/* Course Sections */}
           <div className="bg-card border border-border rounded-xl p-6">

@@ -74,38 +74,39 @@ const CourseCard = ({
       className={cn(
         'relative rounded-lg overflow-hidden transition-all duration-200',
         'border border-border hover:border-primary/30 hover:shadow-md',
-        currentStatus.bgColor,
+        'bg-card',
         !currentStatus.accessible && 'opacity-60',
         className
       )}
       {...props}
     >
-      {/* Status badge - top right */}
-      <div className="absolute top-3 right-3 z-20">
-        <Badge status={currentStatus.badge} size="sm" className="whitespace-nowrap">
-          {currentStatus.text}
-        </Badge>
+      {/* Status banner - top of card */}
+      <div className={cn(
+        'w-full px-4 py-2 text-center text-sm font-medium text-white',
+        currentStatus.bgColor
+      )}>
+        {currentStatus.text}
       </div>
 
-      <div className="p-6 pr-24 text-white">
+      <div className="p-6 text-foreground">
         {/* Header with icon and title */}
         <div className="flex items-start gap-4 mb-4">
           <div className="flex-shrink-0">
-            <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
               <Icon 
                 name={getDefaultIcon()} 
                 size="lg" 
-                className="text-white"
+                className="text-primary"
               />
             </div>
           </div>
           
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-lg text-white mb-1 line-clamp-2">
+            <h3 className="font-semibold text-lg text-foreground mb-1 line-clamp-2">
               {title}
             </h3>
             {code && (
-              <p className="text-white/70 text-sm font-medium">
+              <p className="text-muted-foreground text-sm font-medium">
                 {code}
               </p>
             )}
@@ -114,32 +115,32 @@ const CourseCard = ({
 
         {/* Course details */}
         <div className="space-y-2 mb-6">
-          <div className="flex items-center gap-2 text-sm text-white/80">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Icon name="user" size="xs" />
             <span>acceder como {role}</span>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-white/80">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Icon name="monitor" size="xs" />
             <span>{type === 'e-learning' ? 'e-Learning' : type}</span>
           </div>
 
           {hasMoreClasses && (
-            <div className="flex items-center gap-2 text-sm text-white/80">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Icon name="calendar" size="xs" />
               <span>Ya no hay más clases</span>
             </div>
           )}
 
           {startDate && (
-            <div className="flex items-center gap-2 text-sm text-white/80">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Icon name="calendar" size="xs" />
               <span>Inicio: {formatDate(startDate)}</span>
             </div>
           )}
 
           {endDate && (
-            <div className="flex items-center gap-2 text-sm text-white/80">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Icon name="calendar" size="xs" />
               <span>Término: {formatDate(endDate)}</span>
             </div>

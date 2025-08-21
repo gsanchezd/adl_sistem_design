@@ -97,7 +97,7 @@ const ModuleCard = ({
   };
 
   const containerClasses = cn(
-    'relative rounded-lg p-4 transition-all duration-200 cursor-pointer hover-lift',
+    'relative rounded-lg p-4 transition-all duration-200',
     getCardStyles(),
     className
   );
@@ -110,15 +110,6 @@ const ModuleCard = ({
   return (
     <div
       className={containerClasses}
-      onClick={handleClick}
-      role="button"
-      tabIndex={disabled ? -1 : 0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleClick(e);
-        }
-      }}
       {...props}
     >
       {/* Badge de estado activo */}
@@ -183,7 +174,7 @@ const ModuleCard = ({
                         e.stopPropagation();
                         window.location.href = links[type];
                       }}
-                      className="text-primary hover:text-primary/80 underline transition-colors"
+                      className="text-primary hover:text-primary/80 underline transition-colors cursor-pointer"
                     >
                       {linkText}
                     </button>

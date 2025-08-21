@@ -174,7 +174,6 @@ export default function CursosPage() {
             {/* Course Listing Section */}
             <div className="bg-card border border-border rounded-xl p-6">
               <div className="mb-6">
-                <h2 className="text-xl font-semibold">Mis Cursos</h2>
                 <p className="text-muted-foreground text-sm">
                   Mostrando {startIndex + 1}-{Math.min(endIndex, filteredCourses.length)} de {filteredCourses.length} cursos disponibles
                 </p>
