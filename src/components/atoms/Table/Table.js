@@ -47,13 +47,13 @@ const TableComponent = ({
 };
 
 // Exportar componente principal y subcomponentes
-TableComponent.Header = ({ children, className, ...props }) => (
-  <thead className={cn('bg-muted/50', className)} {...props}>
-    {children}
-  </thead>
-);
-
-TableComponent.Header.displayName = 'TableHeader';
+TableComponent.Header = function TableHeader({ children, className, ...props }) {
+  return (
+    <thead className={cn('bg-muted/50', className)} {...props}>
+      {children}
+    </thead>
+  );
+};
 
 TableComponent.Body = ({ children, className, striped, hoverable, ...props }) => {
   const { striped: _striped, hoverable: _hoverable, ...cleanProps } = props;
@@ -72,7 +72,7 @@ TableComponent.Body = ({ children, className, striped, hoverable, ...props }) =>
 
 TableComponent.Body.displayName = 'TableBody';
 
-TableComponent.Row = ({ children, className, striped, hoverable, index, ...props }) => {
+TableComponent.Row = function TableRow({ children, className, striped, hoverable, index, ...props }) {
   const { striped: _striped, hoverable: _hoverable, ...cleanProps } = props;
   
   return (
@@ -89,8 +89,6 @@ TableComponent.Row = ({ children, className, striped, hoverable, index, ...props
     </tr>
   );
 };
-
-TableComponent.Row.displayName = 'TableRow';
 
 TableComponent.HeaderCell = ({ children, className, ...props }) => (
   <th 
