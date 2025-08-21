@@ -53,6 +53,8 @@ TableComponent.Header = ({ children, className, ...props }) => (
   </thead>
 );
 
+TableComponent.Header.displayName = 'TableHeader';
+
 TableComponent.Body = ({ children, className, striped, hoverable, ...props }) => {
   const { striped: _striped, hoverable: _hoverable, ...cleanProps } = props;
   
@@ -67,6 +69,8 @@ TableComponent.Body = ({ children, className, striped, hoverable, ...props }) =>
     </tbody>
   );
 };
+
+TableComponent.Body.displayName = 'TableBody';
 
 TableComponent.Row = ({ children, className, striped, hoverable, index, ...props }) => {
   const { striped: _striped, hoverable: _hoverable, ...cleanProps } = props;
@@ -86,6 +90,8 @@ TableComponent.Row = ({ children, className, striped, hoverable, index, ...props
   );
 };
 
+TableComponent.Row.displayName = 'TableRow';
+
 TableComponent.HeaderCell = ({ children, className, ...props }) => (
   <th 
     className={cn(
@@ -99,6 +105,8 @@ TableComponent.HeaderCell = ({ children, className, ...props }) => (
   </th>
 );
 
+TableComponent.HeaderCell.displayName = 'TableHeaderCell';
+
 TableComponent.Cell = ({ children, className, ...props }) => (
   <td 
     className={cn(
@@ -110,6 +118,8 @@ TableComponent.Cell = ({ children, className, ...props }) => (
     {children}
   </td>
 );
+
+TableComponent.Cell.displayName = 'TableCell';
 
 TableComponent.propTypes = {
   children: PropTypes.node.isRequired,
