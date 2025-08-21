@@ -187,31 +187,51 @@ const ModuleCard = ({
 
           {/* Footer con estado y acción */}
           <div className="flex items-center justify-between">
-            {/* Badge de estado */}
-            <Badge status={displayStatus} size="sm">
-              {displayStatus === 'completed' && 'Completado'}
-              {displayStatus === 'in-progress' && 'En progreso'}
-              {displayStatus === 'pending' && 'Pendiente'}
-              {displayStatus === 'blocked' && 'Bloqueado'}
-              {displayStatus === 'optional' && 'Opcional'}
-            </Badge>
+            {/* Badge de estado - solo mostrar algunos */}
+            {(displayStatus === 'in-progress' || displayStatus === 'pending') && (
+              <Badge status={displayStatus} size="sm">
+                {displayStatus === 'in-progress' && 'En progreso'}
+                {displayStatus === 'pending' && 'Pendiente'}
+              </Badge>
+            )}
+            {displayStatus === 'completed' && (
+              <Badge status={displayStatus} size="sm">
+                Completado
+              </Badge>
+            )}
+            {displayStatus === 'optional' && (
+              <Badge status={displayStatus} size="sm">
+                Opcional
+              </Badge>
+            )}
+            {displayStatus === 'blocked' && <div />}
 
-            {/* Botón de acción */}
-            <Button
-              size="sm"
-              variant={
-                displayStatus === 'completed' || displayStatus === 'in-progress'
-                  ? 'primary'
-                  : displayStatus === 'blocked'
-                  ? 'ghost'
-                  : 'primary'
-              }
-              disabled={disabled || displayStatus === 'blocked'}
-              onClick={handleAction}
-              className="ml-auto min-w-[100px] text-center"
-            >
-              {getActionLabel()}
-            </Button>
+            {/* Botón de acción - solo para estados específicos */}
+            {displayStatus === 'in-progress' && (
+              <Button
+                size="sm"
+                variant="primary"
+                onClick={handleAction}
+                className="ml-auto min-w-[100px] text-center"
+              >
+                Continuar
+              </Button>
+            )}
+            {displayStatus === 'completed' && (
+              <Button
+                size="sm"
+                variant="primary"
+                onClick={handleAction}
+                className="ml-auto min-w-[100px] text-center"
+              >
+                Entrar
+              </Button>
+            )}
+            {displayStatus === 'blocked' && (
+              <span className="text-xs text-muted-foreground ml-auto">
+                Completa módulos anteriores
+              </span>
+            )}
           </div>
         </div>
       </div>

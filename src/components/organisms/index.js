@@ -7,3 +7,6 @@ export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as ChatWidget } from './ChatWidget/ChatWidget';
 export { default as ModuleGrid } from './ModuleGrid/ModuleGrid';
 export { default as FilterSidebar } from './FilterSidebar/FilterSidebar';
+export { default as CourseSidebar } from './CourseSidebar/CourseSidebar';
+export { default as CourseHeader } from './CourseHeader/CourseHeader';
+export { default as TutorChat } from './TutorChat/TutorChat';
