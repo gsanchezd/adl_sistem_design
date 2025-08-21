@@ -1,9 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useTheme } from '../contexts/ThemeContext';
-import { Button, Icon, Badge } from '../components/atoms';
+import { Button, Icon, Badge, Logo } from '../components/atoms';
 
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
@@ -32,6 +31,14 @@ export default function Home() {
       icon: 'book',
       badge: '4 componentes',
       color: 'bg-accent/5 border-accent/20 hover:bg-accent/10'
+    },
+    {
+      title: 'Página de Cursos',
+      description: 'Implementación completa de la página de cursos con filtros avanzados y grid de tarjetas de cursos.',
+      href: '/cursos',
+      icon: 'monitor',
+      badge: 'Página demo',
+      color: 'bg-green-500/5 border-green-500/20 hover:bg-green-500/10'
     }
   ];
 
@@ -42,11 +49,9 @@ export default function Home() {
         {/* Header */}
         <header className="text-center space-y-6 mb-16">
           <div className="flex justify-center mb-4">
-            <Image 
-              src="https://doc-images-adl.s3-sa-east-1.amazonaws.com/logo.svg" 
-              alt="Empieza" 
-              width={64}
-              height={64}
+            <Logo 
+              width={80}
+              height={53}
               className="h-16 w-auto"
             />
           </div>

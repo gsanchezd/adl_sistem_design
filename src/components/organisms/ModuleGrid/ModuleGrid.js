@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '../../../utils/cn';
 import { SearchInput, ModuleCard, ProgressSection } from '../../molecules';
-import { Button, Icon, Badge } from '../../atoms';
+import { Button, Icon, Badge, Select } from '../../atoms';
 
 const ModuleGrid = ({
   modules = [],
@@ -119,17 +119,16 @@ const ModuleGrid = ({
                 />
               </div>
               
-              <select
+              <Select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-2 bg-card border border-border rounded-lg text-sm"
-              >
-                {sortOptions.map(option => (
-                  <option key={option.key} value={option.key}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+                onChange={(value) => setSortBy(value)}
+                options={sortOptions.map(option => ({
+                  value: option.key,
+                  label: option.label
+                }))}
+                placeholder="Ordenar por..."
+                size="sm"
+              />
             </div>
           )}
 
@@ -179,7 +178,7 @@ const ModuleGrid = ({
 
       {/* Grid de módulos */}
       {filteredModules.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {filteredModules.map((module) => (
             <ModuleCard
               key={module.number}

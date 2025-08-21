@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useTheme } from '../../contexts/ThemeContext';
 import { 
-  Header, 
+  Header,
   Sidebar, 
   ChatWidget, 
   ModuleGrid 
@@ -15,8 +15,6 @@ export default function OrganismsPage() {
   const { theme, toggleTheme } = useTheme();
   
   // Estados para los componentes interactivos
-  const [headerNotifications, setHeaderNotifications] = useState(false);
-  const [headerUserMenu, setHeaderUserMenu] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [chatMinimized, setChatMinimized] = useState(true);
   const [selectedModule, setSelectedModule] = useState(null);
@@ -59,21 +57,6 @@ export default function OrganismsPage() {
   const sampleModules = [
     {
       number: 1,
-      title: 'Prepárate para este curso',
-      description: 'Recursos iniciales y preparación',
-      status: 'optional',
-      type: 'self-learning'
-    },
-    {
-      number: 2,
-      title: 'Evaluación Diagnóstico',
-      description: 'Evaluación inicial de conocimientos',
-      status: 'completed',
-      type: 'tutoring',
-      progress: 100
-    },
-    {
-      number: 3,
       title: 'MÓDULO 1',
       description: 'Introducción a los conceptos fundamentales',
       status: 'completed',
@@ -81,7 +64,7 @@ export default function OrganismsPage() {
       progress: 100
     },
     {
-      number: 4,
+      number: 2,
       title: 'MÓDULO 2',
       description: 'Metodologías de mejora continua',
       status: 'in-progress',
@@ -90,18 +73,11 @@ export default function OrganismsPage() {
       active: true
     },
     {
-      number: 5,
+      number: 3,
       title: 'MÓDULO 3',
       description: 'Aplicación práctica',
       status: 'pending',
       type: 'tutoring'
-    },
-    {
-      number: 6,
-      title: 'Encuestas',
-      description: 'Evaluación del progreso',
-      status: 'blocked',
-      type: 'self-learning'
     }
   ];
 
@@ -130,35 +106,20 @@ export default function OrganismsPage() {
   const userProgress = {
     title: 'Mi Progreso General',
     subtitle: 'Curso de Mejora Continua',
-    progress: 75,
-    maxProgress: 6,
+    progress: 67,
+    maxProgress: 3,
     currentLabel: 'Módulo actual',
-    progressLabel: '4 de 6 módulos completados'
+    progressLabel: '2 de 3 módulos completados'
   };
 
   const sidebarProgress = {
-    value: 75,
+    value: 67,
     currentLabel: 'Progreso general',
-    progressLabel: '4/6 módulos'
+    progressLabel: '2/3 módulos'
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Demostración del Header */}
-      <div className="mb-8">
-        <Header
-          user={sampleUser}
-          onSearch={(query) => console.log('Search:', query)}
-          onToggleTheme={toggleTheme}
-          theme={theme}
-          notifications={sampleNotifications}
-          showNotifications={headerNotifications}
-          onToggleNotifications={() => setHeaderNotifications(!headerNotifications)}
-          showUserMenu={headerUserMenu}
-          onToggleUserMenu={() => setHeaderUserMenu(!headerUserMenu)}
-        />
-      </div>
-
       <div className="flex">
         {/* Demostración del Sidebar */}
         <div className="flex-shrink-0">
@@ -201,6 +162,29 @@ export default function OrganismsPage() {
                 Cambiar a tema {theme === 'dark' ? 'claro' : 'oscuro'}
               </Button>
             </header>
+
+            {/* Header Section */}
+            <section className="space-y-6">
+              <h2 className="text-2xl font-semibold">Header</h2>
+              <p className="text-muted-foreground">
+                Cabecera principal de la aplicación con navegación, logo y perfil de usuario
+              </p>
+              
+              <div className="border border-border rounded-xl p-6 bg-card">
+                <h3 className="text-lg font-semibold mb-4">Header Completo</h3>
+                <div className="bg-background border border-border rounded-lg overflow-hidden">
+                  <Header
+                    title="Mi Dashboard"
+                    showMenuButton={true}
+                    menuOpen={!sidebarCollapsed}
+                    onMenuToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
+                    theme={theme}
+                    onThemeToggle={toggleTheme}
+                    user={sampleUser}
+                  />
+                </div>
+              </div>
+            </section>
 
             {/* ModuleGrid Section */}
             <section className="space-y-6">

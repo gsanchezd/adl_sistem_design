@@ -11,6 +11,7 @@ export { default as Badge } from './Badge/Badge';
 export { default as Avatar } from './Avatar/Avatar';
 export { default as Icon } from './Icon/Icon';
 export { default as IconButton } from './IconButton/IconButton';
+export { default as Logo } from './Logo/Logo';
 export { default as ProgressBar } from './ProgressBar/ProgressBar';
 export { default as Spinner } from './Spinner/Spinner';
 export { default as Table } from './Table/Table';

@@ -33,32 +33,14 @@ const Header = ({
       )}
       {...props}
     >
-      {/* Logo y navegación */}
-      <div className="flex items-center gap-6">
+      {/* Logo */}
+      <div className="flex items-center">
         <Link href="/" className="flex items-center gap-3">
           <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
             <Icon name="lightning" size="sm" className="text-primary-foreground" />
           </div>
           <span className="text-xl font-bold text-foreground">Empieza</span>
         </Link>
-        
-        <nav className="hidden md:flex items-center gap-1">
-          <Link href="/atoms">
-            <Button variant="ghost" size="sm">
-              Atoms
-            </Button>
-          </Link>
-          <Link href="/molecules">
-            <Button variant="ghost" size="sm">
-              Molecules
-            </Button>
-          </Link>
-          <Link href="/organisms">
-            <Button variant="ghost" size="sm">
-              Organisms
-            </Button>
-          </Link>
-        </nav>
       </div>
 
       {/* Búsqueda central */}
@@ -152,15 +134,10 @@ const Header = ({
             variant="ghost"
             size="sm"
             onClick={onToggleUserMenu}
-            className="p-1"
+            className="flex items-center gap-2"
           >
-            <UserInfo
-              user={user}
-              size="sm"
-              layout="horizontal"
-              showStatus={false}
-              clickable={false}
-            />
+            <span className="text-sm font-medium text-foreground">{user?.name}</span>
+            <Icon name="chevron-down" size="xs" className="text-muted-foreground" />
           </Button>
 
           {/* Dropdown de usuario */}

@@ -10,3 +10,4 @@ export { default as DropdownItem } from './DropdownItem/DropdownItem';
 export { default as ProgressSection } from './ProgressSection/ProgressSection';
 export { default as Alert } from './Alert/Alert';
 export { default as Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
+export { default as CourseCard } from './CourseCard/CourseCard';

@@ -13,6 +13,7 @@ import { Badge } from '../../components/atoms';
 import { Avatar } from '../../components/atoms';
 import { Icon } from '../../components/atoms';
 import { IconButton } from '../../components/atoms';
+import { Logo } from '../../components/atoms';
 import { ProgressBar } from '../../components/atoms';
 import { Table } from '../../components/atoms';
 import { Pagination } from '../../components/atoms';
@@ -518,6 +519,37 @@ export default function AtomsPage() {
                 <span className="text-xs text-muted-foreground">{iconName}</span>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Logo Section */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-semibold">Logo</h2>
+          <p className="text-muted-foreground">
+            Logo que cambia automáticamente según el tema actual
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 bg-card border border-border rounded-xl">
+              <h3 className="text-lg font-semibold mb-4">Logo Estándar</h3>
+              <div className="flex items-center justify-center p-6 border border-border rounded-lg bg-background">
+                <Logo />
+              </div>
+            </div>
+            
+            <div className="p-6 bg-card border border-border rounded-xl">
+              <h3 className="text-lg font-semibold mb-4">Logo Pequeño</h3>
+              <div className="flex items-center justify-center p-6 border border-border rounded-lg bg-background">
+                <Logo width={80} height={26} className="h-4 sm:h-5 md:h-6" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="p-4 bg-accent rounded-lg">
+            <p className="text-sm text-accent-foreground">
+              <strong>💡 Tip:</strong> El logo cambia automáticamente según el tema. 
+              Prueba el botón de cambio de tema para verlo en acción.
+            </p>
           </div>
         </section>
 
