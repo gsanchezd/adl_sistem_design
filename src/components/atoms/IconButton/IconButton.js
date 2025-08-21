@@ -43,9 +43,9 @@ const IconButton = ({
     destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
     outline: 'border border-border bg-background hover:bg-accent hover:text-accent-foreground',
     ghost: 'hover:bg-accent hover:text-accent-foreground',
-    success: 'bg-green-500 text-white hover:bg-green-600',
-    warning: 'bg-yellow-500 text-white hover:bg-yellow-600',
-    info: 'bg-blue-500 text-white hover:bg-blue-600',
+    success: 'bg-[#22c55e] text-white hover:bg-[#16a34a]',
+    warning: 'bg-[#f97316] text-white hover:bg-[#ea580c]',
+    info: 'bg-[#0891b2] text-white hover:bg-[#0e7490]',
   };
 
   const baseClasses = cn(

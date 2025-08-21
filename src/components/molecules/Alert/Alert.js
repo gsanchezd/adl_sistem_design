@@ -23,24 +23,24 @@ const Alert = ({
       iconColor: 'text-muted-foreground'
     },
     info: {
-      container: 'bg-blue-50 border-blue-200 text-blue-900 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-100',
+      container: 'border-2 text-foreground bg-[#0891b2]/10 border-[#0891b2]',
       icon: 'question',
-      iconColor: 'text-blue-600 dark:text-blue-400'
+      iconColor: 'text-[#0891b2]'
     },
     success: {
-      container: 'bg-green-50 border-green-200 text-green-900 dark:bg-green-950 dark:border-green-800 dark:text-green-100',
+      container: 'border-2 text-foreground bg-[#22c55e]/10 border-[#22c55e]',
       icon: 'check',
-      iconColor: 'text-green-600 dark:text-green-400'
+      iconColor: 'text-[#22c55e]'
     },
     warning: {
-      container: 'bg-yellow-50 border-yellow-200 text-yellow-900 dark:bg-yellow-950 dark:border-yellow-800 dark:text-yellow-100',
+      container: 'border-2 text-foreground bg-[#f97316]/10 border-[#f97316]',
       icon: 'clock',
-      iconColor: 'text-yellow-600 dark:text-yellow-400'
+      iconColor: 'text-[#f97316]'
     },
     error: {
-      container: 'bg-red-50 border-red-200 text-red-900 dark:bg-red-950 dark:border-red-800 dark:text-red-100',
+      container: 'border-2 text-foreground bg-[#dc2626]/10 border-[#dc2626]',
       icon: 'close',
-      iconColor: 'text-red-600 dark:text-red-400'
+      iconColor: 'text-[#dc2626]'
     }
   };
 
@@ -58,7 +58,7 @@ const Alert = ({
   return (
     <div
       className={cn(
-        'relative rounded-lg border p-4',
+        'relative rounded-lg p-4',
         variantStyles.container,
         className
       )}

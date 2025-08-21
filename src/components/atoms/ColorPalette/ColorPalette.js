@@ -39,10 +39,16 @@ const ColorPalette = ({
       'Ring': { css: 'hsl(var(--ring))', value: 'hsl(84, 55%, 40%)' },
     },
     'Colores Semánticos': {
-      'Success': { css: '#10b981', value: '#10b981' },
-      'Warning': { css: '#f59e0b', value: '#f59e0b' },
-      'Error': { css: '#ef4444', value: '#ef4444' },
-      'Info': { css: '#3b82f6', value: '#3b82f6' },
+      'Success': { css: '#22c55e', value: '#22c55e' },     // Verde más vibrante, complementa el primary
+      'Warning': { css: '#f97316', value: '#f97316' },     // Naranja cálido (complementario del verde)
+      'Error': { css: '#dc2626', value: '#dc2626' },       // Rojo más profundo y elegante
+      'Info': { css: '#0891b2', value: '#0891b2' },        // Cyan/teal que combina con verde
+    },
+    'Colores Extendidos': {
+      'Purple': { css: '#9333ea', value: '#9333ea' },      // Púrpura para badges especiales
+      'Indigo': { css: '#4f46e5', value: '#4f46e5' },      // Índigo para enlaces y acciones secundarias
+      'Pink': { css: '#ec4899', value: '#ec4899' },        // Rosa para elementos de comunidad
+      'Amber': { css: '#f59e0b', value: '#f59e0b' },       // Ámbar para highlights
     }
   };
 

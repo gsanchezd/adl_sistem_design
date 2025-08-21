@@ -70,7 +70,7 @@ const ModuleCard = ({
       case 'in-progress':
         return 'Continuar';
       case 'blocked':
-        return 'Completa módulos anteriores';
+        return 'Bloqueado';
       case 'optional':
         return 'Ver recursos';
       default:
@@ -146,11 +146,6 @@ const ModuleCard = ({
             <h4 className="font-medium text-foreground truncate">
               {displayTitle}
             </h4>
-            {active && (
-              <Badge status="active" size="sm" className="ml-auto">
-                ACTIVA
-              </Badge>
-            )}
           </div>
 
           {/* Descripción */}
@@ -213,7 +208,7 @@ const ModuleCard = ({
               }
               disabled={disabled || displayStatus === 'blocked'}
               onClick={handleAction}
-              className="ml-auto"
+              className="ml-auto min-w-[100px] text-center"
             >
               {getActionLabel()}
             </Button>
