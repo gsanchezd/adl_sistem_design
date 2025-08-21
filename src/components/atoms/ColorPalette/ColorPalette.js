@@ -143,6 +143,8 @@ const ColorPalette = ({
     );
   };
 
+  ColorSwatch.displayName = 'ColorSwatch';
+
   return (
     <div className={cn('w-full space-y-8', className)} {...props}>
       {Object.entries(colorGroups).map(([groupName, colors]) => (
@@ -169,7 +171,7 @@ const ColorPalette = ({
       
       {copyable && (
         <div className="text-center text-sm text-muted-foreground">
-          💡 Haz click en cualquier color para copiarlo al portapapeles
+          💡 Haz clic en cualquier color para copiarlo al portapapeles
         </div>
       )}
     </div>
