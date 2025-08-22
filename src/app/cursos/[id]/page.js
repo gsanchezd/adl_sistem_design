@@ -4,7 +4,8 @@ import { useState, use } from 'react';
 import Link from 'next/link';
 import { Button, Icon, Badge } from '../../../components/atoms';
 import { ModuleCard } from '../../../components/molecules';
-import { CourseSidebar, CourseHeader, TutorChat } from '../../../components/organisms';
+import { CourseSidebar, AppHeader, TutorChat } from '../../../components/organisms';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 // Mock data para el curso
 const getCourseData = (id) => {
@@ -111,6 +112,8 @@ export default function CursoPage({ params }) {
   const resolvedParams = use(params);
   const course = getCourseData(resolvedParams.id);
   const [isTutorOpen, setIsTutorOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { theme, toggleTheme } = useTheme();
 
   if (!course) {
     return (
@@ -153,38 +156,46 @@ export default function CursoPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Sidebar */}
-      <CourseSidebar
-        currentProgress={course.progress.current}
-        completedSections={course.progress.completed}
-        totalSections={course.progress.total}
-        onTutorOpen={() => setIsTutorOpen(true)}
-      />
+    <div className="min-h-screen bg-background">
+      <div className="flex">
+        {/* Sidebar */}
+        {sidebarOpen && (
+          <CourseSidebar
+            currentProgress={course.progress.current}
+            completedSections={course.progress.completed}
+            totalSections={course.progress.total}
+            onTutorOpen={() => setIsTutorOpen(true)}
+          />
+        )}
 
-      {/* Main Content */}
-      <div className="flex-1">
-        {/* Header */}
-        <CourseHeader
-          title={course.title}
-          startDate={course.startDate}
-          endDate={course.endDate}
-          format={course.format}
-        />
+        {/* Main Content */}
+        <div className="flex-1 min-h-screen">
+          <AppHeader
+            title="Mis Cursos_"
+            showMenuButton={true}
+            menuOpen={sidebarOpen}
+            onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
+            theme={theme}
+            onThemeToggle={toggleTheme}
+            user={{
+              name: 'Gonzalo',
+              avatar: null,
+              notifications: 999
+            }}
+          />
 
-        {/* Breadcrumb */}
-        <div className="bg-muted/30 border-b border-border px-6 py-3">
-          <nav className="flex items-center space-x-2 text-sm">
-            <Link href="/cursos" className="text-muted-foreground hover:text-foreground transition-colors">
-              Cursos
-            </Link>
-            <Icon name="chevron-right" size="sm" className="text-muted-foreground" />
-            <span className="text-primary font-medium">Dashboard</span>
-          </nav>
-        </div>
-
-        {/* Content */}
-        <div className="p-6 space-y-6">
+          {/* Course content */}
+          <main className="p-6 space-y-6">
+            {/* Breadcrumb */}
+            <div className="bg-muted/30 border-b border-border px-6 py-3 -m-6 mb-6">
+              <nav className="flex items-center space-x-2 text-sm">
+                <Link href="/cursos" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Cursos
+                </Link>
+                <Icon name="chevron-right" size="sm" className="text-muted-foreground" />
+                <span className="text-primary font-medium">Dashboard</span>
+              </nav>
+            </div>
 
           {/* Course Sections */}
           <div className="bg-card border border-border rounded-xl p-6">
@@ -209,6 +220,7 @@ export default function CursoPage({ params }) {
               ))}
             </div>
           </div>
+          </main>
         </div>
       </div>
 

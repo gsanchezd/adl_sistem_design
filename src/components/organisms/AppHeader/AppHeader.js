@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { cn } from '../../../utils/cn';
@@ -21,6 +21,67 @@ const AppHeader = ({
   className,
   ...props
 }) => {
+  // State for user dropdown
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Extract non-DOM props to avoid React warnings
+  const {
+    showMenuButton: _showMenuButton,
+    menuOpen: _menuOpen,
+    onMenuToggle: _onMenuToggle,
+    showThemeToggle: _showThemeToggle,
+    theme: _theme,
+    onThemeToggle: _onThemeToggle,
+    user: _user,
+    title: _title,
+    ...domProps
+  } = { showMenuButton, menuOpen, onMenuToggle, showThemeToggle, theme, onThemeToggle, user, title, ...props };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsUserDropdownOpen(false);
+      }
+    };
+
+    if (isUserDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isUserDropdownOpen]);
+
+  const toggleUserDropdown = () => {
+    setIsUserDropdownOpen(!isUserDropdownOpen);
+  };
+
+  const closeUserDropdown = () => {
+    setIsUserDropdownOpen(false);
+  };
+
+  const handleUserMenuAction = (action) => {
+    closeUserDropdown();
+    // Handle different menu actions
+    switch (action) {
+      case 'profile':
+        console.log('Navigate to profile');
+        break;
+      case 'settings':
+        console.log('Navigate to settings');
+        break;
+      case 'logout':
+        console.log('Logout user');
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <header 
       className={cn(
@@ -30,7 +91,7 @@ const AppHeader = ({
         'min-h-[60px] sm:min-h-[68px]',
         className
       )}
-      {...props}
+      {...domProps}
     >
       {/* Left section: Menu button + Title */}
       <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-1 min-w-0">
@@ -98,11 +159,12 @@ const AppHeader = ({
         )}
 
         {/* User profile */}
-        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+        <div className="relative flex items-center gap-1 sm:gap-2 flex-shrink-0" ref={dropdownRef}>
           <Avatar
             src={user.avatar}
             name={user.name}
             size="sm"
+            onClick={toggleUserDropdown}
             className="cursor-pointer hover:ring-2 hover:ring-primary/20 transition-all w-8 h-8 sm:w-9 sm:h-9"
           />
           
@@ -111,13 +173,21 @@ const AppHeader = ({
             <Button
               variant="ghost"
               size="sm"
+              onClick={toggleUserDropdown}
               className="text-left flex items-center gap-2 px-2 py-1"
             >
               <div className="text-sm min-w-0">
                 <p className="font-medium text-foreground truncate max-w-[100px]">{user.name}</p>
                 <p className="text-xs text-muted-foreground">Ver perfil</p>
               </div>
-              <Icon name="chevron-down" size="xs" className="text-muted-foreground flex-shrink-0" />
+              <Icon 
+                name="chevron-down" 
+                size="xs" 
+                className={cn(
+                  "text-muted-foreground flex-shrink-0 transition-transform duration-200",
+                  isUserDropdownOpen && "rotate-180"
+                )} 
+              />
             </Button>
           </div>
 
@@ -126,12 +196,60 @@ const AppHeader = ({
             <Button
               variant="ghost"
               size="sm"
+              onClick={toggleUserDropdown}
               className="text-left flex items-center gap-1 px-1"
             >
               <span className="text-sm font-medium text-foreground truncate max-w-[80px]">{user.name}</span>
-              <Icon name="chevron-down" size="xs" className="text-muted-foreground flex-shrink-0" />
+              <Icon 
+                name="chevron-down" 
+                size="xs" 
+                className={cn(
+                  "text-muted-foreground flex-shrink-0 transition-transform duration-200",
+                  isUserDropdownOpen && "rotate-180"
+                )} 
+              />
             </Button>
           </div>
+
+          {/* Dropdown Menu */}
+          {isUserDropdownOpen && (
+            <div className="absolute right-0 top-full mt-2 w-56 bg-popover border border-border rounded-lg shadow-lg z-50 py-2">
+              {/* User Info Section */}
+              <div className="px-3 py-2 border-b border-border">
+                <p className="font-medium text-foreground text-sm">{user.name}</p>
+                <p className="text-xs text-muted-foreground">Ver y editar perfil</p>
+              </div>
+
+              {/* Menu Items */}
+              <div className="py-1">
+                <button
+                  onClick={() => handleUserMenuAction('profile')}
+                  className="w-full text-left px-3 py-2 text-sm text-foreground hover:bg-accent transition-colors flex items-center gap-2"
+                >
+                  <Icon name="user" size="xs" />
+                  Mi Perfil
+                </button>
+                
+                <button
+                  onClick={() => handleUserMenuAction('settings')}
+                  className="w-full text-left px-3 py-2 text-sm text-foreground hover:bg-accent transition-colors flex items-center gap-2"
+                >
+                  <Icon name="settings" size="xs" />
+                  Configuración
+                </button>
+
+                <hr className="my-1 border-border" />
+                
+                <button
+                  onClick={() => handleUserMenuAction('logout')}
+                  className="w-full text-left px-3 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors flex items-center gap-2"
+                >
+                  <Icon name="logout" size="xs" />
+                  Cerrar Sesión
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Mobile theme toggle */}

@@ -42,7 +42,7 @@ const Switch = forwardRef(({
     sizes[size].track,
     checked 
       ? 'bg-primary' 
-      : 'bg-input border border-border',
+      : 'bg-muted/80 dark:bg-muted/60 border border-border dark:border-muted-foreground/30',
     error && 'focus:ring-destructive',
     disabled && 'cursor-not-allowed opacity-50',
     className

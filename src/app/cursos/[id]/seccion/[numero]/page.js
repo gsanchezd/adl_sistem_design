@@ -3,7 +3,8 @@
 import { useState, use } from 'react';
 import Link from 'next/link';
 import { Button, Icon } from '../../../../../components/atoms';
-import { CourseSidebar, TutorChat } from '../../../../../components/organisms';
+import { CourseSidebar, AppHeader, TutorChat } from '../../../../../components/organisms';
+import { useTheme } from '../../../../../contexts/ThemeContext';
 
 // Mock data para obtener información del curso y sección
 const getCourseData = (id) => {
@@ -85,6 +86,8 @@ export default function SeccionPage({ params, searchParams }) {
   const course = getCourseData(resolvedParams.id);
   const section = getSectionData(resolvedParams.id, parseInt(resolvedParams.numero));
   const [isTutorOpen, setIsTutorOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { theme, toggleTheme } = useTheme();
   
   // Obtener el tipo de contenido desde los parámetros de búsqueda
   const contentType = resolvedSearchParams?.tipo || section?.type || 'clase';
@@ -126,75 +129,78 @@ export default function SeccionPage({ params, searchParams }) {
   const { title: sectionTitle, contentUrl, renderType } = getContentInfo();
 
   return (
-    <div className="min-h-screen flex">
-      {/* Sidebar */}
-      <CourseSidebar
-        currentProgress={course.progress.current}
-        completedSections={course.progress.completed}
-        totalSections={course.progress.total}
-        onTutorOpen={() => setIsTutorOpen(true)}
-      />
+    <div className="min-h-screen bg-background">
+      <div className="flex">
+        {/* Sidebar */}
+        {sidebarOpen && (
+          <CourseSidebar
+            currentProgress={course.progress.current}
+            completedSections={course.progress.completed}
+            totalSections={course.progress.total}
+            onTutorOpen={() => setIsTutorOpen(true)}
+          />
+        )}
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <header className="bg-card border-b border-border px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link href={`/cursos/${course.id}`}>
-                <Button variant="ghost" size="sm">
-                  <Icon name="arrow-left" size="sm" className="mr-2" />
-                  Volver al Curso
-                </Button>
-              </Link>
-              <div>
-                <h1 className="text-xl font-semibold text-foreground">{sectionTitle}</h1>
-                <p className="text-sm text-muted-foreground">{course.title}</p>
+        {/* Main Content */}
+        <div className="flex-1 min-h-screen">
+          <AppHeader
+            title="Mis Cursos_"
+            showMenuButton={true}
+            menuOpen={sidebarOpen}
+            onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
+            theme={theme}
+            onThemeToggle={toggleTheme}
+            user={{
+              name: 'Gonzalo',
+              avatar: null,
+              notifications: 999
+            }}
+          />
+
+          {/* Course content */}
+          <main className="p-6 space-y-6">
+            {/* Breadcrumb and back button */}
+            <div className="bg-muted/30 border-b border-border px-6 py-3 -m-6 mb-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <Link href={`/cursos/${course.id}`}>
+                    <Button variant="ghost" size="sm">
+                      <Icon name="arrow-left" size="sm" className="mr-2" />
+                      Volver al Curso
+                    </Button>
+                  </Link>
+                  <div>
+                    <h1 className="text-xl font-semibold text-foreground">{sectionTitle}</h1>
+                    <p className="text-sm text-muted-foreground">{course.title}</p>
+                  </div>
+                </div>
+                
+                {/* Content Type Badge */}
+                <div className="flex items-center gap-2">
+                  {contentType === 'programa-academico' && (
+                    <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                      <Icon name="book" size="xs" />
+                      Programa Académico
+                    </div>
+                  )}
+                  {contentType === 'clase' && (
+                    <div className="flex items-center gap-2 px-3 py-1 bg-blue-500/10 text-blue-600 rounded-full text-sm">
+                      <Icon name="monitor" size="xs" />
+                      Clase
+                    </div>
+                  )}
+                  {contentType === 'tutoria' && (
+                    <div className="flex items-center gap-2 px-3 py-1 bg-green-500/10 text-green-600 rounded-full text-sm">
+                      <Icon name="users" size="xs" />
+                      Tutoría
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-            
-            {/* Content Type Badge */}
-            <div className="flex items-center gap-2">
-              {contentType === 'programa-academico' && (
-                <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                  <Icon name="book" size="xs" />
-                  Programa Académico
-                </div>
-              )}
-              {contentType === 'clase' && (
-                <div className="flex items-center gap-2 px-3 py-1 bg-blue-500/10 text-blue-600 rounded-full text-sm">
-                  <Icon name="monitor" size="xs" />
-                  Clase
-                </div>
-              )}
-              {contentType === 'tutoria' && (
-                <div className="flex items-center gap-2 px-3 py-1 bg-green-500/10 text-green-600 rounded-full text-sm">
-                  <Icon name="users" size="xs" />
-                  Tutoría
-                </div>
-              )}
-            </div>
-          </div>
-        </header>
 
-        {/* Breadcrumb */}
-        <div className="bg-muted/30 border-b border-border px-6 py-3">
-          <nav className="flex items-center space-x-2 text-sm">
-            <Link href="/cursos" className="text-muted-foreground hover:text-foreground transition-colors">
-              Cursos
-            </Link>
-            <Icon name="chevron-right" size="sm" className="text-muted-foreground" />
-            <Link href={`/cursos/${course.id}`} className="text-muted-foreground hover:text-foreground transition-colors">
-              {course.title}
-            </Link>
-            <Icon name="chevron-right" size="sm" className="text-muted-foreground" />
-            <span className="text-primary font-medium">Sección {resolvedParams.numero}</span>
-          </nav>
-        </div>
-
-        {/* Content Display */}
-        <div className="flex-1 p-6">
-          <div className="h-full bg-white border border-border rounded-xl overflow-hidden">
+            {/* Content Display */}
+            <div className="flex-1 bg-white border border-border rounded-xl overflow-hidden">
             {renderType === 'pdf' ? (
               <div className="w-full h-full min-h-[600px] relative">
                 {/* PDF display using iframe with viewer */}
@@ -237,7 +243,8 @@ export default function SeccionPage({ params, searchParams }) {
                 sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation"
               />
             )}
-          </div>
+            </div>
+          </main>
         </div>
       </div>
 
