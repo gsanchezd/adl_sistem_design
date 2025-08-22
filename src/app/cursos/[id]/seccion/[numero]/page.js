@@ -194,14 +194,39 @@ export default function SeccionPage({ params, searchParams }) {
 
         {/* Content Display */}
         <div className="flex-1 p-6">
-          <div className="h-full bg-card border border-border rounded-xl overflow-hidden">
+          <div className="h-full bg-white border border-border rounded-xl overflow-hidden">
             {renderType === 'pdf' ? (
-              <embed
-                src={contentUrl}
-                type="application/pdf"
-                className="w-full h-full min-h-[600px]"
-                title={sectionTitle}
-              />
+              <div className="w-full h-full min-h-[600px] relative">
+                {/* PDF display using iframe with viewer */}
+                <iframe
+                  src={`${contentUrl}#view=FitH&toolbar=1&navpanes=1&scrollbar=1`}
+                  className="w-full h-full border-0"
+                  style={{ backgroundColor: 'white' }}
+                  title={sectionTitle}
+                  type="application/pdf"
+                />
+                
+                {/* Fallback message and manual actions */}
+                <div className="absolute top-4 right-4 flex gap-2">
+                  <a
+                    href={contentUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-lg text-sm hover:bg-primary/90 transition-colors shadow-lg"
+                  >
+                    <Icon name="document" size="sm" />
+                    Abrir en nueva pestaña
+                  </a>
+                  <a
+                    href={contentUrl}
+                    download
+                    className="inline-flex items-center gap-2 px-3 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm hover:bg-secondary/90 transition-colors shadow-lg"
+                  >
+                    <Icon name="arrow-right" size="sm" />
+                    Descargar
+                  </a>
+                </div>
+              </div>
             ) : (
               <iframe
                 src={contentUrl}

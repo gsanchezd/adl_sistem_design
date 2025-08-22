@@ -22,19 +22,22 @@ const CourseCard = ({
     'concluded': {
       badge: 'completed',
       text: 'Curso concluido',
-      bgColor: 'bg-teal-900',
+      bgColor: 'bg-muted',
+      textColor: 'text-muted-foreground',
       accessible: true
     },
     'active': {
       badge: 'in-progress', 
       text: 'Curso activo',
-      bgColor: 'bg-blue-900',
+      bgColor: 'bg-primary',
+      textColor: 'text-primary-foreground',
       accessible: true
     },
     'upcoming': {
       badge: 'pending',
       text: 'Próximamente',
-      bgColor: 'bg-gray-700',
+      bgColor: 'bg-secondary',
+      textColor: 'text-secondary-foreground',
       accessible: false
     }
   };
@@ -82,8 +85,9 @@ const CourseCard = ({
     >
       {/* Status banner - top of card */}
       <div className={cn(
-        'w-full px-4 py-2 text-center text-sm font-medium text-white',
-        currentStatus.bgColor
+        'w-full px-4 py-2 text-center text-sm font-medium',
+        currentStatus.bgColor,
+        currentStatus.textColor
       )}>
         {currentStatus.text}
       </div>
