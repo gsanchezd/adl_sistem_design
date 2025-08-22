@@ -75,7 +75,7 @@ const CourseCard = ({
   return (
     <div
       className={cn(
-        'relative rounded-lg overflow-hidden transition-all duration-200',
+        'relative rounded-lg overflow-hidden transition-all duration-200 flex flex-col h-full',
         'border border-border hover:border-primary/30 hover:shadow-md',
         'bg-card',
         !currentStatus.accessible && 'opacity-60',
@@ -92,72 +92,55 @@ const CourseCard = ({
         {currentStatus.text}
       </div>
 
-      <div className="p-6 text-foreground">
-        {/* Header with icon and title */}
-        <div className="flex items-start gap-4 mb-4">
-          <div className="flex-shrink-0">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-              <Icon 
-                name={getDefaultIcon()} 
-                size="lg" 
-                className="text-primary"
-              />
-            </div>
-          </div>
-          
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-lg text-foreground mb-1 line-clamp-2">
-              {title}
-            </h3>
-            {code && (
-              <p className="text-muted-foreground text-sm font-medium">
-                {code}
-              </p>
+      {/* Dates section - right below banner */}
+      {(startDate || endDate) && (
+        <div className="px-4 py-2 bg-muted/30 border-b border-border text-xs text-muted-foreground">
+          <div className="flex items-center justify-center gap-4">
+            {startDate && (
+              <div className="flex items-center gap-1">
+                <Icon name="calendar" size="xs" />
+                <span>{formatDate(startDate)}</span>
+              </div>
+            )}
+            {startDate && endDate && <span>-</span>}
+            {endDate && (
+              <div className="flex items-center gap-1">
+                <Icon name="calendar" size="xs" />
+                <span>{formatDate(endDate)}</span>
+              </div>
             )}
           </div>
         </div>
+      )}
 
-        {/* Course details */}
-        <div className="space-y-2 mb-6">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Icon name="user" size="xs" />
-            <span>acceder como {role}</span>
-          </div>
+      <div className="p-6 text-foreground flex flex-col flex-grow">
+        {/* Header with title */}
+        <div className="mb-4">
+          <h3 className="font-semibold text-lg text-foreground mb-1 line-clamp-3">
+            {title}
+          </h3>
+          {code && (
+            <p className="text-muted-foreground text-sm font-medium">
+              {code}
+            </p>
+          )}
+        </div>
 
+        {/* Course details - flex-grow to take available space */}
+        <div className="space-y-2 mb-6 flex-grow">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Icon name="monitor" size="xs" />
             <span>{type === 'e-learning' ? 'e-Learning' : type}</span>
           </div>
-
-          {hasMoreClasses && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Icon name="calendar" size="xs" />
-              <span>Ya no hay más clases</span>
-            </div>
-          )}
-
-          {startDate && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Icon name="calendar" size="xs" />
-              <span>Inicio: {formatDate(startDate)}</span>
-            </div>
-          )}
-
-          {endDate && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Icon name="calendar" size="xs" />
-              <span>Término: {formatDate(endDate)}</span>
-            </div>
-          )}
         </div>
 
-        {/* Access button */}
+        {/* Access button - always at bottom */}
         <Button
           variant={currentStatus.accessible ? "secondary" : "ghost"}
           size="sm"
           onClick={handleAccess}
           disabled={!currentStatus.accessible}
-          className="w-full justify-center"
+          className="w-full justify-center mt-auto"
         >
           {currentStatus.accessible ? 'Acceder' : 'No disponible'}
         </Button>

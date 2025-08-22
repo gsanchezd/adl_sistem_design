@@ -10,7 +10,7 @@ const mockCourses = [
   {
     id: 1,
     title: '[ADMIN] PreBootcamp',
-    code: '[ADMIN] PreBootcamp',
+    code: 'ADM-PBC-001',
     status: 'concluded',
     type: 'e-Learning',
     role: 'Admin',
@@ -22,7 +22,7 @@ const mockCourses = [
   {
     id: 2,
     title: '[ADMIN] LP4 - Programación básica en Python - Data Science',
-    code: '[ADMIN] LP4 - Data Science',
+    code: 'ADM-LP4-DS-002',
     status: 'concluded',
     type: 'e-Learning',
     role: 'Admin',
@@ -34,7 +34,7 @@ const mockCourses = [
   {
     id: 3,
     title: '[ADMIN] Data Analysis asincrónico',
-    code: '[ADMIN] Data Analysis asincrónico',
+    code: 'ADM-DA-003',
     status: 'concluded',
     type: 'e-Learning',
     role: 'Admin',
@@ -45,7 +45,7 @@ const mockCourses = [
   {
     id: 4,
     title: '[ADMIN] Data Studio',
-    code: '[ADMIN] Data Studio',
+    code: 'ADM-DS-004',
     status: 'concluded',
     type: 'Inmerso',
     role: 'Admin',
@@ -56,7 +56,7 @@ const mockCourses = [
   {
     id: 5,
     title: '[ADMIN] LP4 - Diseño UX - Diseño UX/UI',
-    code: 'Diseño UX/UI',
+    code: 'ADM-LP4-UX-005',
     status: 'concluded',
     type: 'e-Learning',
     role: 'Admin',
@@ -68,7 +68,7 @@ const mockCourses = [
   {
     id: 6,
     title: '[ADMIN] LP4 - Fundamentos Desarrollo Web - Diseño UX/UI',
-    code: 'Diseño UX/UI',
+    code: 'ADM-LP4-WEB-006',
     status: 'concluded',
     type: 'e-Learning',
     role: 'Admin',
